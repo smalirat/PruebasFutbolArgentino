@@ -1,0 +1,129 @@
+@startuml
+abstract class Publicacion {
+  - id: int
+  - titulo: string
+  - contenido: text
+  - fechaPublicacion: date
+  - imagenUrl: string
+}
+
+class Usuario {
+  - id: int
+  - nombre: string
+  - email: string
+  - telefono: string
+  - passwordHash: string
+  - perfil: PerfilJugador
+}
+
+class PerfilJugador {
+  - fechaNacimiento: date
+  - nacionalidad: string
+  - altura: float
+  - peso: float
+  - pieDominante: string
+  - posicion: string
+  - redesSociales: List<RedSocial>
+  + agregarRedSocial(red: RedSocial): void
+  + eliminarRedSocial(tipo: TipoRed): void
+  + calcularEdad(): int
+  + calcularCategoria(): CategoriaFormativa
+}
+
+class PerfilJugadorBuilder {
+  - borrador: PerfilJugador
+  - fechaNacimiento: date
+  - nacionalidad: string
+  - altura: float
+  - peso: float
+  - pieDominante: string
+  - posicion: string
+  - redesSociales: List<RedSocial>
+  + agregarFechaNacimiento(fecha: date): PerfilJugadorBuilder
+  + agregarNacionalidad(nacionalidad: string): PerfilJugadorBuilder
+  + agregarAltura(altura: float): PerfilJugadorBuilder
+  + agregarPeso(peso: float): PerfilJugadorBuilder
+  + agregarPieDominante(pie: string): PerfilJugadorBuilder
+  + agregarPosicion(posicion: string): PerfilJugadorBuilder
+  + agregarRedSocial(red: RedSocial): PerfilJugadorBuilder
+  + construirBorrador(): PerfilJugador
+}
+
+
+class RedSocial {
+  - id: int
+  - tipo: TipoRed
+  - url: string
+}
+
+class Club {
+  - id: int
+  - nombre: string
+  - ciudad: string
+  - fundacion: int
+  - logoUrl: string
+  - info: Info
+}
+
+class Info {
+  - id: int
+  - titulo: string
+  - descripcion: string
+  - valor: string
+  - categoria: CategoriaFormativa
+}
+
+Enum CategoriaFormativa {
+  OCTAVA
+  SEPTIMA
+  SEXTA
+  QUINTA
+  CUARTA
+  PRIMERA
+}
+
+Enum TipoRed {
+    X
+    FACEBOOK
+    INSTAGRAM
+    YOUTUBE
+    WHATSAPP
+}
+
+class Prueba extends Publicacion {
+  - club: Club
+  - activa: boolean
+  - categoria: CategoriaFormativa
+  - fechaCreacion: date
+  + desactivar(): boolean
+}
+
+class Noticia extends Publicacion {
+  - urlFuente: string
+  - autor: string
+}
+
+class Pais {
+  - id: int
+  - nombre: string
+}
+
+class Liga {
+  - id: int
+  - nombre: string
+  - pais: Pais
+  - clubes: List<Club>
+}
+
+Liga --> Pais
+Liga --> Club
+Usuario --> PerfilJugador
+PerfilJugador --> RedSocial
+RedSocial --> TipoRed
+Club --> Info
+Info --> CategoriaFormativa
+Prueba --> CategoriaFormativa
+Prueba --> Club
+PerfilJugadorBuilder --> PerfilJugador
+
+@enduml
