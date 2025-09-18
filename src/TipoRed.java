@@ -1,3 +1,0 @@
-public enum TipoRed {
-  X, FACEBOOK, INSTAGRAM, YOUTUBE, WHATSAPP
-}

@@ -1,0 +1,7 @@
+export enum TipoRed {
+  X = 'X',
+  FACEBOOK = 'FACEBOOK',
+  INSTAGRAM = 'INSTAGRAM',
+  YOUTUBE = 'YOUTUBE',
+  WHATSAPP = 'WHATSAPP'
+}
